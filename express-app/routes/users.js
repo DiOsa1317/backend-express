@@ -28,11 +28,9 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-    const name = req.body;
-    //items.push(newUser);
     const insert = "INSERT INTO users (name) VALUES (@name)";
-    db.run(insert, [name]);
-    return res.status(201).json(name);
+    db.run(insert, [req.body.name]);
+    return res.status(201).json({name : req.body.name});
 })
 
 router.get('/:id', function(req, res, next) {
