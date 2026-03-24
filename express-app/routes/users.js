@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 let items = [
-    { 'id': 1, "name": "Максим" },
-    { 'id': 2, "name": "Дилия" }
+    { id: 1, name: "Максим" },
+    { id: 2, name: "Дилия" }
 ]
 
 /* GET users listing. */
@@ -19,16 +19,15 @@ router.post('/', function(req, res, next) {
     return res.status(201).json(newUser);
 })
 
-router.get('/', function(req, res, next) {
-    const userId = req.params.id;
-    const user = null;
+router.get('/:id', function(req, res, next) {
+    const userId = parseInt(req.params.id);
     for (const item of items) {
-        if (item['id'] != userId) {
+        if (item.id !== userId) {
             continue;
         }
-        return res.status(201).json(item);
+        return res.send(res.json(item));
     }
-    return res.status(404);
+    return res.send(res.status(404));
 });
 
 module.exports = router;
